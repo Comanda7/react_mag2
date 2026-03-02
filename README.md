@@ -299,3 +299,53 @@ docs: обновить README
 ## Лицензия
 
 MIT — используйте свободно в учебных целях.
+
+---
+
+## Как выглядит репозиторий на GitHub и как этого добились
+
+После пуша на GitHub страница репозитория eact_mag2 выглядит так:
+
+`
+RishatRita77 / react_mag2   (Public)
+
+src/             first commit          XX min ago
+.gitignore       first commit          XX min ago
+README.md        docs: add GitHub...   1 min ago
+index.html       first commit          XX min ago
+package-lock.json first commit         XX min ago
+package.json     first commit          XX min ago
+vite.config.js   first commit          XX min ago
+`
+
+### Что значат колонки
+
+| Колонка | Значение |
+|---------|----------|
+| Имя файла/папки | Файл или директория в корне проекта |
+| Сообщение коммита | Последний коммит, который **изменял этот файл** |
+| Время | Когда был тот коммит |
+
+### Почему разные сообщения у одних файлов
+
+Потому что было **два коммита**:
+
+1. **irst commit**  добавили все файлы сразу:
+`ash
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Comanda7/react_mag2.git
+git push -u origin main
+`
+
+2. **docs: add GitHub deployment guide to README**  изменили только README.md:
+`ash
+git add README.md
+git commit -m "docs: add GitHub deployment guide to README"
+git push
+`
+
+> Каждый git commit создаёт **снимок** (snapshot) состояния файлов.
+> На GitHub в списке файлов отображается **последний коммит, который затронул этот файл**.
