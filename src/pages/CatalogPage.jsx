@@ -36,11 +36,15 @@ function CatalogPage() {
 
       <main className="catalog-main">
         <div className="catalog-toolbar">
-          <Input
-            placeholder="🔍 Поиск по названию…"
-            value={search}
-            onChange={handleSearch}
-          />
+          <div className="search-wrap">
+            <span className="search-icon">🔍</span>
+            <Input
+              placeholder="Поиск по названию…"
+              value={search}
+              onChange={handleSearch}
+              className="search-with-icon"
+            />
+          </div>
           <select className="select-sort" value={sort} onChange={handleSort}>
             <option value="">Без сортировки</option>
             <option value="asc">Цена ↑</option>

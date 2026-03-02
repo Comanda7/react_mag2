@@ -49,7 +49,7 @@ function ProfilePage() {
         </div>
         <div className="pstat-card pstat-green">
           <span className="pstat-icon">&#128176;</span>
-          <span className="pstat-value">{orders.length ? formatPrice(totalSpent) : '&#8212;'}</span>
+          <span className="pstat-value">{orders.length ? formatPrice(totalSpent) : '\u2014'}</span>
           <span className="pstat-label">&#1055;&#1086;&#1090;&#1088;&#1072;&#1095;&#1077;&#1085;&#1086;</span>
         </div>
       </div>
