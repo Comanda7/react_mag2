@@ -81,23 +81,25 @@ export function updateCartQty(productId, delta) {
   return cart
 }
 
-export function placeOrder() {
+export function placeOrder(customer = {}) {
   const cart = getCart()
   if (!cart.length) return null
   const prods = getProducts()
   const stats = getProductStats()
 
   const order = {
-    id:     Date.now(),
-    date:   new Date().toLocaleString('ru-RU'),
-    status: 'Новый',
+    id:       Date.now(),
+    date:     new Date().toLocaleString('ru-RU'),
+    status:   'Новый',
+    customer: customer,
     items:  cart.map(item => {
       const p = prods.find(x => x.id === item.id)
+      if (!p) return { id: item.id, name: `Товар #${item.id}`, price: 0, quantity: item.quantity, sum: 0 }
       return { id: item.id, name: p.name, price: p.price, quantity: item.quantity, sum: p.price * item.quantity }
     }),
     total: cart.reduce((s, item) => {
       const p = prods.find(x => x.id === item.id)
-      return s + p.price * item.quantity
+      return s + (p ? p.price * item.quantity : 0)
     }, 0),
   }
 
@@ -105,7 +107,7 @@ export function placeOrder() {
   const updatedProds = prods.map(p => {
     const ci = cart.find(i => i.id === p.id)
     if (ci) {
-      stats[p.id].ordered = (stats[p.id].ordered || 0) + ci.quantity
+      if (stats[p.id]) stats[p.id].ordered = (stats[p.id].ordered || 0) + ci.quantity
       return { ...p, stock: Math.max(0, p.stock - ci.quantity) }
     }
     return p

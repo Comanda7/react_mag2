@@ -48,8 +48,8 @@ const useStore = create((set, get) => ({
   },
 
   // ── Заказы ────────────────────────────────────────────────
-  placeOrder() {
-    const order = svcPlaceOrder()
+  placeOrder(fields) {
+    const order = svcPlaceOrder(fields)
     if (order) {
       set({
         cart:     getCart(),

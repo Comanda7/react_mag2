@@ -26,8 +26,8 @@ export default function useCart() {
     }
   }
 
-  const handleCheckout = () => {
-    const order = placeOrder()
+  const handleCheckout = (fields) => {
+    const order = placeOrder(fields)
     if (order) notify?.push(`Заказ #${order.id} оформлен! 🎉`)
     return order
   }

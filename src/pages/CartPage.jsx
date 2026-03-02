@@ -14,10 +14,14 @@ function CartPage() {
     return p ? { ...item, product: p, sum: p.price * item.quantity } : null
   }).filter(Boolean)
 
-  const onConfirm = () => {
-    const order = handleCheckout()
+  const onConfirm = (fields) => {
+    try {
+      handleCheckout(fields)
+    } catch (err) {
+      console.error('Ошибка оформления заказа:', err)
+    }
     setShowCheckout(false)
-    if (order) navigate('/profile')
+    navigate('/profile')
   }
 
   if (rows.length === 0) {
@@ -33,7 +37,7 @@ function CartPage() {
     <>
     {showCheckout && (
       <CheckoutModal
-        total={cartTotal()}
+        total={cartTotal}
         onConfirm={onConfirm}
         onClose={() => setShowCheckout(false)}
       />
@@ -78,7 +82,7 @@ function CartPage() {
       </div>
 
       <div className="cart-total">
-        <strong>Итого: {formatPrice(cartTotal())}</strong>
+        <strong>Итого: {formatPrice(cartTotal)}</strong>
         <button className="btn btn-primary btn-lg" onClick={() => setShowCheckout(true)}>
           Оформить заказ
         </button>
