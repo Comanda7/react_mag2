@@ -29,7 +29,12 @@ function ProductCard({ product }) {
         title="Подробнее о товаре"
         aria-label={`Подробнее: ${product.name}`}
       >
-        <div className="product-image">{product.image}</div>
+        <div className="product-image">
+          {product.imageUrl
+            ? <img src={product.imageUrl} alt={product.name} className="product-img" />
+            : <span className="product-emoji">{product.image}</span>
+          }
+        </div>
         <span className="product-image-hint">🔍 Подробнее</span>
       </button>
       <div className="product-category">{CATEGORY_NAMES[product.category]}</div>

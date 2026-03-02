@@ -9,6 +9,7 @@ import {
   placeOrder     as svcPlaceOrder,
   updateOrderStatus as svcUpdateOrderStatus,
   updateProductStock as svcUpdateProductStock,
+  updateProductImage as svcUpdateProductImage,
 } from '../services/storageService'
 
 /** Zustand-стор — единый источник состояния для всего приложения */
@@ -69,6 +70,11 @@ const useStore = create((set, get) => ({
   // ── Товары (Админ) ────────────────────────────────────────
   updateProductStock(productId, newStock) {
     const products = svcUpdateProductStock(productId, newStock)
+    set({ products })
+  },
+
+  updateProductImage(productId, imageUrl) {
+    const products = svcUpdateProductImage(productId, imageUrl)
     set({ products })
   },
 
